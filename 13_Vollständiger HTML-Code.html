@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kleiderspenden-Portal</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Grundlegendes CSS für das Layout */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #e0e0e0;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .logo {
+            height: 50px;
+            width: 50px;
+            background-color: #ccc; /* Platzhalter für das Logo */
+        }
+        nav {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+        .donate-button {
+            background-color: #444;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .donate-button:hover {
+            background-color: #666;
+        }
+        main {
+            padding-top: 100px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-section {
+            background-color: #ddd;
+            height: 30vh; /* 30% der Bildschirmhöhe */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            flex-direction: column;
+        }
+        .hero-content {
+            position: absolute;
+            bottom: 10px; /* Positioniert den Inhalt am unteren Rand */
+            text-align: center;
+            width: 100%;
+        }
+        .form-section {
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 800px;
+            width: 100%;
+        }
+        .modal {
+            background-color: #fff;
+            width: 30%; 
+            height: auto; 
+            max-height: 60%; 
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+            display: none; 
+            border: 1px solid #ddd;
+            overflow-y: auto; 
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .modal-header h2 {
+            margin: 0;
+        }
+        .close-btn {
+            cursor: pointer;
+            font-size: 18px;
+            border: none;
+            background: none;
+        }
+        .modal-content {
+            margin: 20px 0;
+        }
+        .download-btn {
+            margin-top: 10px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #444;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .download-btn:hover {
+            background-color: #666;
+        }
+        .confirm-btn {
+            background-color: #888;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .confirm-btn:hover {
+            background-color: #666;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 500;
+            display: none; 
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            position: fixed;
+            bottom: 0;
+        }
+        .footer-links {
+            display: flex;
+            gap: 10px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-button {
+            background-color: #555;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .footer-button:hover {
+            background-color: #777;
+        }
+        .social-media {
+            display: flex;
+            gap: 10px;
+        }
+        .social-media svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header mit Navigation -->
+    <header>
+        <div class="logo"></div> <!-- Platzhalter für das Logo -->
+        <nav>
+            <ul>
+                <li><a href="#">Startseite</a></li>
+                <li><a href="#">Spenden</a></li>
+                <li><a href="#">Über uns</a></li>
+            </ul>
+            <a href="#" class="donate-button">Jetzt spenden</a>
+        </nav>
+    </header>
+
+    <!-- Hero-Bereich -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>Registrierung zur Kleidungsspende</h2>
+            <p>Gemeinsam helfen wir Menschen in Not. Registrieren Sie Ihre Kleiderspende und tragen Sie zu einer guten Sache bei.</p>
+        </div>
+    </section>
+
+    <!-- Hauptinhalt mit Formular -->
+    <main class="container">
+        <section class="form-section">
+            <h2>Registrierung zur Kleidungsspende</h2>
+            <form id="spende-form">
+                <!-- Name, Email, Telefonnummer, Art der Kleidung -->
+                <div class="form-group">
+                    <label for="name">Ihr Name</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Ihre E-Mail-Adresse</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefon">Ihre Telefonnummer</label>
+                    <input type="tel" id="telefon" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="kleidung">Art der Kleidung</label>
+                    <select id="kleidung" class="form-control" required>
+                        <option value="">Bitte wählen...</option>
+                        <option value="jacke">Jacke</option>
+                        <option value="hose">Hose</option>
+                        <option value="shirt">Shirt</option>
+                        <option value="schuhe">Schuhe</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="krisengebiet">Aktuelles Krisengebiet</label>
+                    <select id="krisengebiet" class="form-control" required>
+                        <option value="">Bitte wählen...</option>
+                        <option value="gebiet1">Gebiet 1</option>
+                        <option value="gebiet2">Gebiet 2</option>
+                    </select>
+                </div>
+
+                <!-- Auswahl: Persönlich abgeben oder Abholung -->
+                <div class="form-group">
+                    <label>Wie möchten Sie die Spende abgeben?</label><br>
+                    <input type="radio" id="persoenlich" name="abgabe" value="persoenlich" required>
+                    <label for="persoenlich">Persönlich abgeben</label><br>
+                    <input type="radio" id="abholung" name="abgabe" value="abholung" required>
+                    <label for="abholung">Abholung</label>
+                </div>
+
+                <!-- Abholadresse (sichtbar nur bei Auswahl "Abholung") -->
+                <div class="form-group" id="abholadresse-container" style="display:none;">
+                    <label for="abholadresse">Abholadresse</label>
+                    <input type="text" id="abholadresse" class="form-control">
+                </div>
+
+                <!-- Absende-Button -->
+                <button type="submit" class="btn btn-primary">Absenden</button>
+            </form>
+        </section>
+
+        <!-- Pop-up-Bereich -->
+        <div class="overlay"></div>
+        <div class="modal" id="confirmationModal">
+            <div class="modal-header">
+                <h2>Bestätigung Ihrer Kleiderspende</h2>
+                <button class="close-btn" onclick="closeModal()">✖</button>
+            </div>
+            <div class="modal-content">
+                <p>Vielen Dank für Ihre Registrierung. Ihre Daten wurden erfolgreich übermittelt.</p>
+                <a href="zusammenfassung.pdf" class="download-btn" download="Zusammenfassung.pdf">Zusammenfassung herunterladen</a>
+            </div>
+            <button class="confirm-btn" onclick="closeModal()">Schließen</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">Datenschutz</a>
+            <a href="#">Impressum</a>
+            <a href="#">Kontaktinformationen</a>
+        </div>
+        <div class="footer-right">
+            <div class="social-media">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+            </div>
+            <a href="#" class="footer-button">Kontakt</a>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript zur Anzeige der Abholadresse nur bei Auswahl von "Abholung"
+        document.getElementById('spende-form').addEventListener('change', function(event) {
+            const abholung = document.getElementById('abholung').checked;
+            const abholadresseContainer = document.getElementById('abholadresse-container');
+            abholadresseContainer.style.display = abholung ? 'block' : 'none';
+        });
+
+        // JavaScript zur Steuerung des Pop-up-Fensters und PLZ-Prüfung
+        document.getElementById('spende-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const abholung = document.getElementById('abholung').checked;
+            if (abholung) {
+                const abholadresse = document.getElementById('abholadresse').value;
+                const plz = abholadresse.substring(0, 2); 
+                const erlaubtePLZ = "12"; 
+
+                if (plz !== erlaubtePLZ) {
+                    alert("Die Abholadresse muss im Postleitzahlbereich '12' liegen.");
+                    return;
+                }
+            }
+            document.getElementById('confirmationModal').style.display = 'block';
+            document.querySelector('.overlay').style.display = 'block';
+        });
+
+        function closeModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+            document.querySelector('.overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
