@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kleiderspenden-Portal</title>
+    <!-- Bootstrap CSS für einfache Responsivität -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Grundlegendes CSS für das Layout */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #e0e0e0;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .logo {
+            height: 50px;
+            width: 50px;
+            background-color: #ccc; /* Platzhalter für das Logo */
+        }
+        nav {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+        .donate-button {
+            background-color: #444;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .donate-button:hover {
+            background-color: #666;
+        }
+        main {
+            padding-top: 100px; /* Platz für den fixierten Header */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: calc(100vh - 100px); /* Gesamte Bildschirmhöhe minus Header */
+        }
+        .hero-section {
+            background-color: #ddd;
+            height: 50vh; /* Hero-Bereich nimmt die Hälfte der Bildschirmhöhe ein */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .hero-content {
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+        }
+        .cta-button {
+            background-color: #888;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            margin: 10px 0;
+            display: inline-block;
+        }
+        .content-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            height: 600px; /* Erhöhung des Content-Bereichs */
+            box-sizing: border-box;
+        }
+        .content-gallery {
+            width: 48%;
+            background-color: #bbb; /* Platzhalter für Bildgalerie */
+            height: 100%; /* Höhe auf gleiche Größe wie Infotext-Platzhalter */
+        }
+        .content-info {
+            width: 48%;
+            background-color: #ddd;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* Maximale Höhe, um sicherzustellen, dass sie mit der Galerie übereinstimmt */
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .footer-links {
+            display: flex;
+            gap: 10px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer-button {
+            background-color: #555;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .footer-button:hover {
+            background-color: #777;
+        }
+
+        /* Responsive Anpassungen */
+        @media (min-width: 768px) {
+            .content-section {
+                flex-direction: row;
+            }
+            .content-gallery {
+                margin-bottom: 0;
+            }
+            .content-info {
+                width: 48%;
+            }
+            header {
+                padding: 0 20px;
+            }
+            nav ul {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header mit Navigation direkt neben der „Jetzt spenden“-Schaltfläche -->
+    <header>
+        <div class="logo"></div> <!-- Platzhalter für das Logo -->
+        <nav>
+            <ul>
+                <li><a href="#">Startseite</a></li>
+                <li><a href="#">Spenden</a></li>
+                <li><a href="#">Über uns</a></li>
+            </ul>
+            <a href="#" class="donate-button">Jetzt spenden</a>
+        </nav>
+    </header>
+
+    <!-- Hauptinhalt -->
+    <main class="container">
+        <!-- Hero-Bereich -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>"Jetzt Kleiderspende registrieren"</h2>
+                <a href="#" class="cta-button">Jetzt Kleiderspende registrieren</a>
+            </div>
+        </section>
+
+        <!-- Content-Bereich -->
+        <section class="content-section">
+            <div class="content-gallery"></div> <!-- Platzhalter für die Bildgalerie -->
+            <div class="content-info">
+                <p>Platzhalter für Infotext. Hier kann ein detaillierter Text über die Kleiderspenden stehen. Die Texte können Informationen zu aktuellen Projekten oder Aktionen enthalten.</p>
+                <a href="#" class="cta-button">Mehr anzeigen</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">Datenschutz</a>
+            <a href="#">Impressum</a>
+            <a href="#">Kontaktinformationen</a>
+        </div>
+        <a href="#" class="footer-button">Kontakt</a>
+    </footer>
+</body>
+</html>
