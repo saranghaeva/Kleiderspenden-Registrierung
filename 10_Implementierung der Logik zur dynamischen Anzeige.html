@@ -1,0 +1,19 @@
+<script>
+    // Logik zur Anzeige der Abholadresse und Überprüfung der Postleitzahl
+    document.getElementById('spende-form').addEventListener('change', function(event) {
+        const abholung = document.getElementById('abholung').checked;
+        const abholadresseContainer = document.getElementById('abholadresse-container');
+        abholadresseContainer.style.display = abholung ? 'block' : 'none';
+
+        // Überprüfung der Postleitzahl (optional)
+        const abholadresseInput = document.getElementById('abholadresse');
+        if (abholung) {
+            abholadresseInput.addEventListener('input', function() {
+                const plz = abholadresseInput.value.slice(0, 2);
+                if (plz !== "12") { // Beispiel für eine PLZ-Prüfung (z. B. 12)
+                    alert("Die Abholadresse muss in Ihrem Postleitzahlbereich liegen.");
+                }
+            });
+        }
+    });
+</script>
