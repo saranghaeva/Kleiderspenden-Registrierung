@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kleiderspenden-Portal</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Grundlegendes CSS für das Layout */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+        header {
+            background-color: #e0e0e0;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .logo {
+            height: 50px;
+            width: 50px;
+            background-color: #ccc;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+        .donate-button {
+            background-color: #444;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .donate-button:hover {
+            background-color: #666;
+        }
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 24px;
+            margin-left: 10px;
+        }
+        .burger-menu div {
+            width: 25px;
+            height: 3px;
+            background-color: #444;
+        }
+        .burger-nav {
+            display: none;
+            position: absolute;
+            top: 80px;
+            right: 30px;
+            background-color: #e0e0e0;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 1001;
+            width: 200px;
+        }
+        .burger-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .burger-nav ul li a {
+            color: #333;
+            text-decoration: none;
+        }
+        main {
+            padding-top: 100px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+        }
+        .form-section {
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .modal {
+            background-color: #fff;
+            width: 80%; 
+            height: auto; 
+            max-height: 60%; 
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+            display: none; 
+            border: 1px solid #ddd;
+            overflow-y: auto;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .footer-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .social-media {
+            display: flex;
+            gap: 10px;
+        }
+        .social-media svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+        .footer-button {
+            background-color: #555;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .footer-button:hover {
+            background-color: #777;
+        }
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: flex;
+            }
+            nav ul {
+                display: none;
+            }
+            header {
+                justify-content: space-between;
+            }
+            .burger-nav {
+                display: none;
+            }
+            .form-section {
+                margin: 10px;
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+            footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .social-media {
+                justify-content: center;
+            }
+            .footer-right {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body onclick="closeBurgerMenu(event)">
+    <!-- Header mit Navigation -->
+    <header>
+        <div class="logo"></div> <!-- Platzhalter für das Logo -->
+        <nav>
+            <ul>
+                <li><a href="#">Startseite</a></li>
+                <li><a href="#">Spenden</a></li>
+                <li><a href="#">Über uns</a></li>
+            </ul>
+            <a href="#" class="donate-button">Jetzt spenden</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMenu(event)">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="burger-nav" id="burgerNav">
+            <ul>
+                <li><a href="#">Startseite</a></li>
+                <li><a href="#">Spenden</a></li>
+                <li><a href="#">Über uns</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hauptinhalt mit Formular -->
+    <main class="container">
+        <section class="form-section">
+            <h2>Registrierung zur Kleidungsspende</h2>
+            <form id="spende-form">
+                <!-- Formularelemente hier hinzufügen -->
+                <button type="submit" class="btn btn-primary">Absenden</button>
+            </form>
+        </section>
+
+        <!-- Pop-up-Bereich -->
+        <div class="overlay"></div>
+        <div class="modal" id="confirmationModal">
+            <div class="modal-header">
+                <h2>Bestätigung Ihrer Kleiderspende</h2>
+                <button class="close-btn" onclick="closeModal()">✖</button>
+            </div>
+            <div class="modal-content">
+                <p>Vielen Dank für Ihre Registrierung. Ihre Daten wurden erfolgreich übermittelt.</p>
+                <a href="zusammenfassung.pdf" class="download-btn" download="Zusammenfassung.pdf">Zusammenfassung herunterladen</a>
+            </div>
+            <button class="confirm-btn" onclick="closeModal()">Schließen</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">Datenschutz</a>
+            <a href="#">Impressum</a>
+            <a href="#">Kontaktinformationen</a>
+        </div>
+        <div class="footer-right">
+            <div class="social-media">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+            </div>
+            <a href="#" class="footer-button">Kontakt</a>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu(event) {
+            event.stopPropagation();
+            const nav = document.getElementById("burgerNav");
+            nav.style.display = nav.style.display === "block" ? "none" : "block";
+        }
+
+        function closeBurgerMenu(event) {
+            const burgerNav = document.getElementById("burgerNav");
+            const burgerMenu = document.querySelector(".burger-menu");
+            if (burgerNav && !burgerNav.contains(event.target) && !burgerMenu.contains(event.target)) {
+                burgerNav.style.display = "none";
+            }
+        }
+
+        // Pop-up-Fenster anzeigen
+        document.getElementById('spende-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('confirmationModal').style.display = 'block';
+            document.querySelector('.overlay').style.display = 'block';
+        });
+
+        function closeModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+            document.querySelector('.overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
