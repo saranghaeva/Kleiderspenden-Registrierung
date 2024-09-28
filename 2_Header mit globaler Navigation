@@ -1,0 +1,12 @@
+<!-- Header mit globaler Navigation -->
+<header style="background-color: #e0e0e0; height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; box-sizing: border-box;">
+    <div class="logo" style="height: 50px; width: 50px; background-color: #ccc;"></div> <!-- Platzhalter für das Logo -->
+    <nav style="display: flex; align-items: center;">
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; gap: 15px;">
+            <li><a href="#" style="text-decoration: none; color: #333;">Startseite</a></li>
+            <li><a href="#" style="text-decoration: none; color: #333;">Spenden</a></li>
+            <li><a href="#" style="text-decoration: none; color: #333;">Über uns</a></li>
+        </ul>
+        <a href="#" style="text-decoration: none; background-color: #444; color: #fff; padding: 8px 15px; border-radius: 5px; margin-left: 15px;">Jetzt spenden</a>
+    </nav>
+</header>
