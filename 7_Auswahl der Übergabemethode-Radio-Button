@@ -1,0 +1,8 @@
+    <!-- Auswahl: Persönlich abgeben oder Abholung -->
+    <div class="form-group">
+        <label>Wie möchten Sie die Spende abgeben?</label><br>
+        <input type="radio" id="persoenlich" name="abgabe" value="persoenlich" required>
+        <label for="persoenlich">Persönlich abgeben</label><br>
+        <input type="radio" id="abholung" name="abgabe" value="abholung" required>
+        <label for="abholung">Abholung</label>
+    </div>
