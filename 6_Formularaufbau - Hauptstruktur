@@ -1,0 +1,24 @@
+<form id="spende-form">
+    <!-- Art der Kleidung -->
+    <div class="form-group">
+        <label for="kleidung">Art der Kleidung</label>
+        <select id="kleidung" class="form-control" required>
+            <option value="">Bitte wählen...</option>
+            <option value="jacke">Jacke</option>
+            <option value="hose">Hose</option>
+            <option value="shirt">Shirt</option>
+            <option value="schuhe">Schuhe</option>
+        </select>
+    </div>
+    
+    <!-- Aktuelles Krisengebiet -->
+    <div class="form-group">
+        <label for="krisengebiet">Aktuelles Krisengebiet</label>
+        <select id="krisengebiet" class="form-control" required>
+            <option value="">Bitte wählen...</option>
+            <option value="gebiet1">Gebiet 1</option>
+            <option value="gebiet2">Gebiet 2</option>
+            <option value="gebiet3">Gebiet 3</option>
+            <option value="gebiet4">Gebiet 4</option>
+        </select>
+    </div>
